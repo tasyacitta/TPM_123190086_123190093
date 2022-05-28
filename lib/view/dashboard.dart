@@ -28,8 +28,8 @@ class _DashboardState extends State<Dashboard> {
                   MaterialPageRoute(builder: (context) => HomePage()),
                       (route) => false);
             },
-            padding: EdgeInsets.only(right: 50),
-            icon: Icon(Icons.logout),
+            padding: EdgeInsets.only(right: 150),
+            icon: Icon(Icons.logout, size: 50,),
           ),
         ],
       ),

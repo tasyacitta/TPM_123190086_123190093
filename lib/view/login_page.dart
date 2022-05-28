@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:prak_b_123190086_123190093/helper/hive_database.dart';
@@ -5,6 +6,7 @@ import 'package:prak_b_123190086_123190093/helper/shared_preference.dart';
 import 'package:prak_b_123190086_123190093/model/user_model.dart';
 import 'package:prak_b_123190086_123190093/view/dashboard.dart';
 import 'package:prak_b_123190086_123190093/view/register.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFFCE4EC),
-      padding: EdgeInsets.fromLTRB(200,50,100,20),
+      padding: EdgeInsets.fromLTRB(150,50,100,20),
       child: Form(
         key: _formKey,
         child: Column(
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
                   'https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFrZXVwfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-                    width: 200,
+                    width: 300,
                     height: 200,
                     fit: BoxFit.cover,)
               ),
@@ -146,9 +148,27 @@ class _LoginPageState extends State<LoginPage> {
 
     found = _hive.checkLogin(username, password);
 
-    if(!found) print("Login Failed");
+    if(!found) {
+      Alert(
+        context: context,
+        type: AlertType.error,
+        title: "Login Error",
+        desc: "Please Try Again",
+        buttons: [
+          DialogButton(
+            color: Color(0xFFF8BBD0),
+            child: Text(
+              "OK",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            width: 120,
+          )
+        ],
+      ).show();
+      }
     else{
-      Navigator.of(context).pushReplacement(
+        Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => Dashboard(),
         ),

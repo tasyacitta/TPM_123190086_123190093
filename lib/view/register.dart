@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:prak_b_123190086_123190093/helper/hive_database.dart';
 import 'package:prak_b_123190086_123190093/model/user_model.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -59,11 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     color: Colors.pink),
                 hintText: "Username",
               ),
-              validator: (String? value) {
-                if (value!.trim().isEmpty) {
-                  return 'Username is required';
-                }
-              },
+              validator: (value) => value!.isEmpty ? 'Username cannot be blank':null,
             ),
             SizedBox(height: 20),
             TextFormField(
@@ -87,11 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 labelText: 'Password',
               ),
-              validator: (String? value) {
-                if (value!.trim().isEmpty) {
-                  return 'Password is required';
-                }
-              },
+              validator: (value) => value!.isEmpty ? 'Password cannot be blank' : null,
             ),
             _buildRegisterButton(),
           ],
@@ -139,6 +132,25 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {});
 
           Navigator.pop(context);
+        }
+        else{
+          Alert(
+            context: context,
+            type: AlertType.error,
+            title: "Registration Error",
+            desc: "Please Try Again",
+            buttons: [
+              DialogButton(
+                color: Color(0xFFF8BBD0),
+                child: Text(
+                  "OK",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () => Navigator.pop(context),
+                width: 120,
+              )
+            ],
+          ).show();
         }
       },
     );
