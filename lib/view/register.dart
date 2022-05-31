@@ -27,7 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: Container(
         color: Color(0xFFFCE4EC),
-        padding: EdgeInsets.fromLTRB(200,20,100,20),
+        padding: EdgeInsets.fromLTRB(50,50,50,20),
         child: Column(
           children: [
             Center(
@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
     required Function(String) submitCallback,
   }){
     return Container(
-      padding: EdgeInsets.fromLTRB(200,30,200,0),
+      padding: EdgeInsets.fromLTRB(20,30,20,0),
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

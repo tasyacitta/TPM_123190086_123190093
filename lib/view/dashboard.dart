@@ -43,7 +43,8 @@ class _DashboardState extends State<Dashboard> {
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                 return Text("Hello, ${snapshot.data}", style: TextStyle(fontSize: 24),);
               },
-            )
+            ),
+            Text("COba")
           ],
         ),
       ),

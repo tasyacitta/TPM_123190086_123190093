@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:prak_b_123190086_123190093/helper/hive_database.dart';
 import 'package:prak_b_123190086_123190093/helper/shared_preference.dart';
 import 'package:prak_b_123190086_123190093/model/user_model.dart';
-import 'package:prak_b_123190086_123190093/view/dashboard.dart';
+import 'package:prak_b_123190086_123190093/view/homepage_makeup.dart';
 import 'package:prak_b_123190086_123190093/view/register.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFFCE4EC),
-      padding: EdgeInsets.fromLTRB(150,50,100,20),
+      padding: EdgeInsets.fromLTRB(50,50,50,20),
       child: Form(
         key: _formKey,
         child: Column(
@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
             TextFormField(
               controller: _usernameController,
               decoration: const InputDecoration(
-                contentPadding: const EdgeInsets.all( 20.0),
+                contentPadding: const EdgeInsets.all(20.0),
                 hintText: "Username",
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
     required Function(String) submitCallback,
   }){
     return Container(
-      padding: EdgeInsets.fromLTRB(200,30,200,0),
+      padding: EdgeInsets.fromLTRB(20,30,20,0),
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
     else{
         Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Dashboard(),
+          builder: (context) => HomePageMakeup(),
         ),
       );
     }
