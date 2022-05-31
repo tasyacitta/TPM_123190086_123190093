@@ -12,11 +12,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _fullnameController = TextEditingController();
+  TextEditingController _dobController = TextEditingController();
 
   final HiveDatabase _hive = HiveDatabase();
+
+  DateTime date = DateTime(2022, 11, 11);
 
   @override
   Widget build(BuildContext context) {
@@ -27,65 +31,123 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: Container(
         color: Color(0xFFFCE4EC),
-        padding: EdgeInsets.fromLTRB(50,50,50,20),
+        padding: EdgeInsets.fromLTRB(50, 50, 50, 20),
         child: Column(
           children: [
             Center(
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
-                  'https://c.tenor.com/mVksnz5RgxMAAAAC/beieza-makeup.gif',
-                     width: 700,
-                    height: 300,
-                    fit: BoxFit.cover,)
-              ),
+                    'https://c.tenor.com/mVksnz5RgxMAAAAC/beieza-makeup.gif',
+                    width: 300,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  )),
             ),
             SizedBox(height: 20),
             TextFormField(
               controller: _usernameController,
               decoration: const InputDecoration(
-                contentPadding: const EdgeInsets.all( 20.0),
+                contentPadding: const EdgeInsets.all(20.0),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+                icon: const Icon(Icons.account_circle, color: Colors.pink),
+                labelText: "Username",
+                hintText: "Username",
+              ),
+              validator: (value) =>
+                  value!.isEmpty ? 'Username cannot be blank' : null,
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                contentPadding: const EdgeInsets.all(20.0),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 ),
                 fillColor: Colors.white,
                 filled: true,
                 icon: const Icon(
-                    Icons.account_circle,
-                    color: Colors.pink),
-                hintText: "Username",
+                  Icons.email,
+                  color: Colors.pink,
+                ),
+                labelText: 'Email',
+                hintText: "yourEmail@mail.com",
               ),
-              validator: (value) => value!.isEmpty ? 'Username cannot be blank':null,
+              validator: (value) =>
+                  value!.isEmpty ? 'Email cannot be blank' : null,
+            ),
+            SizedBox(height: 20),
+            TextFormField(
+              controller: _fullnameController,
+              decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.all(20.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                    BorderSide(color: Colors.pinkAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                    BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  icon: const Icon(
+                    Icons.account_circle,
+                    color: Colors.pink,
+                  ),
+                  labelText: 'Fullname',
+                  hintText: 'John Doe'),
+              validator: (value) =>
+              value!.isEmpty ? 'Name cannot be blank' : null,
             ),
             SizedBox(height: 20),
             TextFormField(
               controller: _passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                contentPadding: const EdgeInsets.all( 20.0),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                icon: const Icon(
-                  Icons.vpn_key_outlined,
-                  color: Colors.pink,
-                ),
-                labelText: 'Password',
-              ),
-              validator: (value) => value!.isEmpty ? 'Password cannot be blank' : null,
+                  contentPadding: const EdgeInsets.all(20.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.pinkAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  icon: const Icon(
+                    Icons.vpn_key_outlined,
+                    color: Colors.pink,
+                  ),
+                  labelText: 'Password',
+                  hintText: "your password"),
+              validator: (value) =>
+                  value!.isEmpty ? 'Password cannot be blank' : null,
             ),
+
+            SizedBox(height: 20),
             _buildRegisterButton(),
           ],
         ),
@@ -96,18 +158,17 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _commonSubmitButton({
     required String labelButton,
     required Function(String) submitCallback,
-  }){
+  }) {
     return Container(
-      padding: EdgeInsets.fromLTRB(20,30,20,0),
+      padding: EdgeInsets.fromLTRB(30, 30, 10, 0),
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0),),
+              borderRadius: new BorderRadius.circular(30.0),
+            ),
             primary: Color(0xFFF8BBD0),
-            textStyle: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold)),
+            textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
         child: Text(labelButton),
         onPressed: () {
           submitCallback(labelButton);
@@ -120,20 +181,20 @@ class _RegisterPageState extends State<RegisterPage> {
     return _commonSubmitButton(
       labelButton: "Register",
       submitCallback: (value) {
-        if (_usernameController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
-          _hive.addData(
-              UserModel(
-                  username: _usernameController.text,
-                  password: _passwordController.text
-              )
-          );
+        if (_usernameController.text.isNotEmpty &&
+            _passwordController.text.isNotEmpty) {
+          _hive.addData(UserModel(
+            username: _usernameController.text,
+            email: _emailController.text,
+            password: _passwordController.text,
+            fullName: _fullnameController.text,
+          ));
           _usernameController.clear();
           _passwordController.clear();
           setState(() {});
 
           Navigator.pop(context);
-        }
-        else{
+        } else {
           Alert(
             context: context,
             type: AlertType.error,

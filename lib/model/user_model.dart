@@ -4,13 +4,20 @@ part 'user_model.g.dart';
 
 @HiveType(typeId: 1)
 class UserModel {
-  UserModel({required this.username, required this.password});
+  UserModel({required this.username, required this.email, required this.password, required this.fullName});
 
   @HiveField(0)
   String username;
 
   @HiveField(1)
+  String email;
+
+  @HiveField(2)
   String password;
+
+
+  @HiveField(3)
+  String fullName;
 
   @override
   String toString() {
