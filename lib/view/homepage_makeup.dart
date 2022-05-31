@@ -112,9 +112,9 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
       return Expanded(
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 300,
+              maxCrossAxisExtent: 350,
               childAspectRatio: 3/2,
-              crossAxisSpacing: 20,
+              crossAxisSpacing: 10,
               mainAxisSpacing: 20),
           itemCount: data!.length,
           itemBuilder: (BuildContext context, int index) {
@@ -126,20 +126,22 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
 
   Widget _buildItemMakeup(String name, String price, String image) {
     return Container(
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Colors.amber,
+            color: Colors.white70,
             borderRadius: BorderRadius.circular(15)
         ),
-        child: Column(
-              children: [
-                Image.network(image,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
-                    Text(name),
-                    Text(price),
-          ],
+        child: InkWell(
+          onTap: (){
+
+          },
+          child: Column(
+                children: [
+                  Image.network(image, width: 80, height: 80, fit: BoxFit.cover),
+                  Text(name),
+                  Text(price),
+            ],
+          ),
         )
     );
   }
