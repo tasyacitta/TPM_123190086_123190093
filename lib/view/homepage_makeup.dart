@@ -69,6 +69,28 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
     return Container(
       child: Column(
         children: [
+          //Filter Product by Brands
+          // FutureBuilder(
+          //   future: DataSource.instance.loadMakeup(),
+          //   builder: (
+          //       BuildContext context,
+          //       AsyncSnapshot<dynamic> snapshot,
+          //       ) {
+          //     if (snapshot.hasError) {
+          //       return _buildErrorSection();
+          //     }
+          //     if (snapshot.hasData) {
+          //       List<ProductsModel>? productsModel = snapshot.data;
+          //       if (snapshot.data!.isNotEmpty) {
+          //         return _buildSuccessSection(productsModel);
+          //       }else{
+          //         return _buildEmptySection();
+          //       }
+          //     }
+          //     return _buildLoadingSection();
+          //   },
+          // ),
+          //All Product
           FutureBuilder(
             future: DataSource.instance.loadMakeup(),
             builder: (
