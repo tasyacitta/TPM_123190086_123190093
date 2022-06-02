@@ -4,6 +4,7 @@ import 'package:prak_b_123190086_123190093/api/source/data_source.dart';
 import 'package:prak_b_123190086_123190093/api/model/products_model.dart';
 import 'package:prak_b_123190086_123190093/helper/shared_preference.dart';
 import 'package:prak_b_123190086_123190093/view/dashboard.dart';
+import 'package:prak_b_123190086_123190093/view/detail_makeup.dart';
 
 import 'homepage.dart';
 
@@ -43,14 +44,9 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
                     // )));
                   },
                   // padding: EdgeInsets.only(right: 50),
-                  icon: Icon(
-                    Icons.account_circle_outlined,
-                    size: 30,
-                  ),
+                  icon: Icon(Icons.account_circle_outlined, size: 30),
                 ),
-                SizedBox(
-                  width: 50,
-                ),
+                SizedBox(width: 20),
                 IconButton(
                   onPressed: () {
                     SharedPreference().setLogout();
@@ -60,91 +56,43 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
                         (route) => false);
                   },
                   // padding: EdgeInsets.only(right: 50),
-                  icon: Icon(
-                    Icons.logout,
-                    size: 30,
-                  ),
+                  icon: Icon(Icons.logout, size: 30),
                 ),
               ]),
             ),
           ],
         ),
-        body: _buildDetailMakeupBody()
-        // Column(
-        //   children: [
-        //     // _buildPref(),
-        //     _buildDetailCountriesBody()
-        //   ],
-        // )
-        );
-  }
-
-  Widget _buildPref() {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(12),
-      child: Column(
-        children: [
-          FutureBuilder(
-            future: SharedPreference().getUsername(),
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              return Text(
-                "Hello, ${snapshot.data}",
-                style: TextStyle(fontSize: 24),
-              );
-            },
-          ),
-          Text("COba")
-        ],
-      ),
+        body: _buildListMakeupBody()
     );
   }
 
-  Widget _buildDetailMakeupBody() {
+  Widget _buildListMakeupBody() {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         children: [
-          //Filter Product by Brands
-          // FutureBuilder(
-          //   future: DataSource.instance.loadMakeup(),
-          //   builder: (
-          //       BuildContext context,
-          //       AsyncSnapshot<dynamic> snapshot,
-          //       ) {
-          //     if (snapshot.hasError) {
-          //       return _buildErrorSection();
-          //     }
-          //     if (snapshot.hasData) {
-          //       List<ProductsModel>? productsModel = snapshot.data;
-          //       if (snapshot.data!.isNotEmpty) {
-          //         return _buildSuccessSection(productsModel);
-          //       }else{
-          //         return _buildEmptySection();
-          //       }
-          //     }
-          //     return _buildLoadingSection();
-          //   },
-          // ),
           //All Product
-          FutureBuilder(
-            future: DataSource.instance.loadMakeup(),
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<dynamic> snapshot,
-            ) {
-              if (snapshot.hasError) {
-                return _buildErrorSection();
-              }
-              if (snapshot.hasData) {
-                List<ProductsModel>? productsModel = snapshot.data;
-                if (snapshot.data!.isNotEmpty) {
-                  return _buildSuccessSection(productsModel);
-                } else {
-                  return _buildEmptySection();
+          Expanded(
+            child: FutureBuilder(
+              future: DataSource.instance.loadMakeup(),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+              ) {
+                if (snapshot.hasError) {
+                  return _buildErrorSection();
                 }
-              }
-              return _buildLoadingSection();
-            },
+                if (snapshot.hasData) {
+                  List<ProductsModel>? productsModel = snapshot.data;
+                  if (snapshot.data!.isNotEmpty) {
+                    return _buildSuccessSection(productsModel);
+                  } else {
+                    return _buildEmptySection();
+                  }
+                }
+                return _buildLoadingSection();
+              },
+            ),
           ),
         ],
       ),
@@ -166,36 +114,94 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
   }
 
   Widget _buildSuccessSection(List<ProductsModel>? data) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 350,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 20),
+    return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 0,
+          crossAxisCount: 2,
+        ),
         itemCount: data!.length,
         itemBuilder: (BuildContext context, int index) {
-          return _buildItemMakeup("${data[index].name}", "${data[index].price}",
-              "${data[index].apiFeaturedImage}");
+          return _buildItemMakeup(data, index, "${data[index].brand}", "${data[index].name}", "${data[index].price}", "${data[index].apiFeaturedImage}");
         },
-      ),
     );
   }
 
-  Widget _buildItemMakeup(String name, String price, String image) {
+  Widget _buildItemMakeup(List<ProductsModel> data, int index, String brand, String name, String price, String image) {
+    // if(index == 0 ){
+    //   Container(
+    //       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    //       alignment: Alignment.topLeft,
+    //       child: Text("All Makeup")
+    //   );
+    // }
+
     return Container(
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: Colors.white70, borderRadius: BorderRadius.circular(15)),
-        child: InkWell(
-          onTap: () {},
-          child: Column(
-            children: [
-              Image.network(image, width: 80, height: 80, fit: BoxFit.cover),
-              Text(name),
-              Text(price),
-            ],
-          ),
-        ));
+      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => DetailMakeup(data: data, index: index),
+                ),
+              );
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: const Offset(8.0, 8.0)
+                    ),
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: const Offset(0.0, 0.0),
+                      blurRadius: 0.0,
+                      spreadRadius: 0.0,
+                    )
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15)
+              ),
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Image.network(image, height: 160, fit: BoxFit.fill)
+                        )
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                      child: Text(brand,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Color(0xFF6E3D4E),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+
+                      ),
+                    ),
+                    Text("\$"+price,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+
+                      ),
+                    ),
+                  ],
+                ),
+            ),
+      ),
+    );
   }
 }

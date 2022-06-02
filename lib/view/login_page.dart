@@ -16,7 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFFCE4EC),
-      padding: EdgeInsets.fromLTRB(50,50,50,20),
+      padding: EdgeInsets.fromLTRB(0,100,0,0),
       child: Form(
         key: _formKey,
         child: Column(
@@ -52,51 +51,56 @@ class _LoginPageState extends State<LoginPage> {
                     fit: BoxFit.cover,)
               ),
             ),
-            SizedBox(height: 20),
-            TextFormField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                contentPadding: const EdgeInsets.all(20.0),
-                hintText: "Username",
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            Container(
+              margin: EdgeInsets.only(top: 50, right: 60, left: 60),
+              child: TextFormField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.all(20.0),
+                  hintText: "Username",
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  icon: const Icon(
+                      Icons.account_circle,
+                      color: Colors.pink,
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                icon: const Icon(
-                    Icons.account_circle,
-                    color: Colors.pink),
+                validator: (value) => value!.isEmpty ? 'Username cannot be blank':null,
               ),
-              validator: (value) => value!.isEmpty ? 'Username cannot be blank':null,
             ),
-            SizedBox(height: 20),
-            TextFormField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                contentPadding: const EdgeInsets.all( 20.0),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            Container(
+              margin: EdgeInsets.only(top: 20, right: 60, left: 60),
+              child: TextFormField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  contentPadding: const EdgeInsets.all(20.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.pinkAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  fillColor: Colors.white,
+                  filled: true,
+                  icon: const Icon(
+                      Icons.vpn_key_outlined,
+                      color: Colors.pink,
+                      ),
+                  hintText: "Password",
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                icon: const Icon(
-                    Icons.vpn_key_outlined,
-                    color: Colors.pink,
-                    ),
-                hintText: "Password",
+                obscureText: true,
+                validator: (value) => value!.isEmpty ? 'Password cannot be blank' : null,
               ),
-              obscureText: true,
-              validator: (value) => value!.isEmpty ? 'Password cannot be blank' : null,
             ),
             _buildLoginButton(),
             _buildRegisterButton(),
@@ -111,8 +115,9 @@ class _LoginPageState extends State<LoginPage> {
     required Function(String) submitCallback,
   }){
     return Container(
-      padding: EdgeInsets.fromLTRB(20,30,20,0),
+      padding: EdgeInsets.fromLTRB(60,30,60,0),
       width: MediaQuery.of(context).size.width,
+      height: 70,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
         shape: new RoundedRectangleBorder(

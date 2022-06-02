@@ -27,6 +27,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Register Page"),
+        centerTitle: true,
         backgroundColor: Color(0xff885566),
       ),
       body: Container(
@@ -162,6 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Container(
       padding: EdgeInsets.fromLTRB(30, 30, 10, 0),
       width: MediaQuery.of(context).size.width,
+      height: 70,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             shape: new RoundedRectangleBorder(
@@ -181,9 +183,11 @@ class _RegisterPageState extends State<RegisterPage> {
     return _commonSubmitButton(
       labelButton: "Register",
       submitCallback: (value) {
+        int i = _hive.getLength();
         if (_usernameController.text.isNotEmpty &&
             _passwordController.text.isNotEmpty) {
           _hive.addData(UserModel(
+            id: i,
             username: _usernameController.text,
             email: _emailController.text,
             password: _passwordController.text,

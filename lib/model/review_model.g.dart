@@ -1,44 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_model.dart';
+part of 'review_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserModelAdapter extends TypeAdapter<UserModel> {
+class ReviewModelAdapter extends TypeAdapter<ReviewModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  UserModel read(BinaryReader reader) {
+  ReviewModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserModel(
+    return ReviewModel(
       id: fields[0] as int,
-      username: fields[1] as String,
-      email: fields[2] as String,
-      password: fields[3] as String,
-      fullName: fields[4] as String,
+      id_user: fields[1] as int,
+      id_product: fields[2] as int,
+      username: fields[3] as String,
+      review: fields[4] as String,
+      usage_period: fields[5] as String,
+      skin_type: fields[6] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, UserModel obj) {
+  void write(BinaryWriter writer, ReviewModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.username)
+      ..write(obj.id_user)
       ..writeByte(2)
-      ..write(obj.email)
+      ..write(obj.id_product)
       ..writeByte(3)
-      ..write(obj.password)
+      ..write(obj.username)
       ..writeByte(4)
-      ..write(obj.fullName);
+      ..write(obj.review)
+      ..writeByte(5)
+      ..write(obj.usage_period)
+      ..writeByte(6)
+      ..write(obj.skin_type);
   }
 
   @override
@@ -47,7 +53,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserModelAdapter &&
+      other is ReviewModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
