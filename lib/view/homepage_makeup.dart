@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prak_b_123190086_123190093/api/source/data_source.dart';
 import 'package:prak_b_123190086_123190093/api/model/products_model.dart';
-import 'package:prak_b_123190086_123190093/helper/shared_preference.dart';
 import 'package:prak_b_123190086_123190093/view/dashboard.dart';
 import 'package:prak_b_123190086_123190093/view/detail_makeup.dart';
-
-import 'homepage.dart';
 
 class HomePageMakeup extends StatefulWidget {
   const HomePageMakeup({Key? key}) : super(key: key);
@@ -45,18 +42,6 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
                   },
                   // padding: EdgeInsets.only(right: 50),
                   icon: Icon(Icons.account_circle_outlined, size: 30),
-                ),
-                SizedBox(width: 20),
-                IconButton(
-                  onPressed: () {
-                    SharedPreference().setLogout();
-                    Navigator.pushAndRemoveUntil(
-                        context ,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                        (route) => false);
-                  },
-                  // padding: EdgeInsets.only(right: 50),
-                  icon: Icon(Icons.logout, size: 30),
                 ),
               ]),
             ),

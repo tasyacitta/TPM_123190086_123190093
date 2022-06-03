@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => HomePage()),
-                  (route) => false);
+                      (route) => false);
             },
             padding: EdgeInsets.only(right: 50),
             icon: Icon(
@@ -80,6 +80,7 @@ class _DashboardState extends State<Dashboard> {
                 children: <Widget>[
                   Text("Username"),
                   FutureBuilder(
+
                     future: SharedPreference().getUsername(),
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -87,7 +88,7 @@ class _DashboardState extends State<Dashboard> {
                         decoration: InputDecoration(
                           labelText: "${snapshot.data}",
                           labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
+                          TextStyle(fontSize: 20, color: Colors.black),
                           enabled: false,
                         ),
                       );

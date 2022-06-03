@@ -33,6 +33,20 @@ class HiveDatabase{
     return length;
   }
 
+  bool checkReview(int id_user, int id_products) {
+    bool check = false;
+    for(int i = 0; i < _localDBReview.length; i++){
+      if (id_user == _localDBReview.getAt(i)!.id_user && id_products == _localDBReview.getAt(i)!.id_product) {
+        check = true;
+        break;
+      }
+      else{
+        check=false;
+      }
+    }
+    return check;
+  }
+
   List<ReviewModel> getReview(int id_products) {
     List<ReviewModel> list = [];
 
