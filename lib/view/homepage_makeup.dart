@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prak_b_123190086_123190093/api/source/data_source.dart';
 import 'package:prak_b_123190086_123190093/api/model/products_model.dart';
-import 'package:prak_b_123190086_123190093/helper/shared_preference.dart';
 import 'package:prak_b_123190086_123190093/view/dashboard.dart';
 import 'package:prak_b_123190086_123190093/view/detail_makeup.dart';
+import 'package:prak_b_123190086_123190093/view/search.dart';
+import 'package:prak_b_123190086_123190093/widget/SearchWidget.dart';
 
 import 'homepage.dart';
 
@@ -39,7 +40,12 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
                   icon: Icon(Icons.account_circle_outlined, size: 30),
                 ),
                 SizedBox(width: 20),
-
+                 IconButton(onPressed: () { Navigator.of(context).push(
+                   MaterialPageRoute(
+                     builder: (context) => Search(),
+                   ),
+                 );
+                   }, icon: Icon(Icons.search,size: 30))
               ]),
             ),
           ],
@@ -52,7 +58,8 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
-        children: [
+        children: <Widget>[
+          // Widget buildSearch(),
           //All Product
           Expanded(
             child: FutureBuilder(
@@ -109,15 +116,7 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
   }
 
   Widget _buildItemMakeup(List<ProductsModel> data, int index, String brand, String name, String price, String image) {
-    // if(index == 0 ){
-    //   Container(
-    //       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-    //       alignment: Alignment.topLeft,
-    //       child: Text("All Makeup")
-    //   );
-    // }
-
-    return Container(
+     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: InkWell(
             onTap: () {
@@ -186,4 +185,5 @@ class _HomePageMakeupState extends State<HomePageMakeup> {
       ),
     );
   }
+
 }

@@ -28,11 +28,6 @@ class SharedPreference {
     return id_user;
   }
 
-  // Future<int> getFullname() async {
-  //   SharedPreferences getPref = await _pref;
-  //   int fullname = getPref.getInt('fullname') ?? 'notFound';
-  //   return id_user;
-  // }
 
   Future<bool> getLoginStatus() async {
     SharedPreferences getPref = await _pref;

@@ -8,11 +8,9 @@ class DataSource {
     return BaseNetwork.getMakeup("");
   }
 
-  Future<List<ProductsModel>> loadMakeupByBrand(String brand) {
-    return BaseNetwork.getMakeup("?brand="+brand);
-  }
 
-  Future<List<ProductsModel>> loadMakeupByProductType(String type) {
-    return BaseNetwork.getMakeup("?product_type="+type);
+
+  Future<List<ProductsModel>> getModelBySearchQuery(String query) {
+    return BaseNetwork.getModelBySearchQuery(query);
   }
 }
